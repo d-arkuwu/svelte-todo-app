@@ -2,18 +2,7 @@
     import type { Task } from "../models";
     import TodoItem from "./TodoItem.svelte";
 
-    let todoItems: Task[] = [
-        {
-            id: "1",
-            title: "dont wank!",
-            isCompleted: false,
-        },
-        {
-            id: "2",
-            title: "what the fuck!",
-            isCompleted: false,
-        },
-    ];
+    export let todoItems:Task[]
 
     function onDeleteItem(id:string) {
         todoItems = todoItems.filter(
@@ -23,6 +12,7 @@
 </script>
 
 <div>
+    <!-- the todoItem.id allows svelte to bind any data to the specfic todoitem -->
     {#each todoItems as todoItem( todoItem.id )}
         <TodoItem
             bind:task={todoItem}
