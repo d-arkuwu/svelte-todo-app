@@ -7,7 +7,6 @@
     const dispatcher = createEventDispatcher()
 
     function deleteItem(){
-        console.log("todoitemactions")
         dispatcher("deleteItem")
     }
 </script>

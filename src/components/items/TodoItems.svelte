@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Task } from "../models";
+    import type { Task } from "../../models";
     import TodoItem from "./TodoItem.svelte";
 
     export let todoItems:Task[]
@@ -17,7 +17,7 @@
         <TodoItem
             bind:task={todoItem}
             on:deleteItem={() => onDeleteItem(todoItem.id)}
-        />
+        />declare module 'foo';
     {/each}
 </div>
 

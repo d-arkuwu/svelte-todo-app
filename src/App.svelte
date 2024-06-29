@@ -1,27 +1,18 @@
 <script lang="ts">
-    import TodoItemActions from "./components/TodoItemActions.svelte";
-    import TodoItems from "./components/TodoItems.svelte";
+    import TodoItemAdd from "./components/items/TodoItemAdd.svelte";
+    import TodoItems from "./components/items/TodoItems.svelte";
     import type { Task } from "./models";
+    import { v4 as uuidv4 } from "uuid";
 
     //moving the main todoItem array to the heart of the application
     //another thing we couldve done though was using svelte stores
 
-    let todoItems: Task[] = [
-        {
-            id: "1",
-            title: "dont wank!",
-            isCompleted: false,
-        },
-        {
-            id: "2",
-            title: "what the fuck!",
-            isCompleted: false,
-        },
-    ];
+    let todoItems: Task[] = [];
 </script>
 
 <main>
-    <TodoItems bind:todoItems={todoItems} />
+    <TodoItems bind:todoItems />
+    <TodoItemAdd bind:todoItems />
 </main>
 
 <style>

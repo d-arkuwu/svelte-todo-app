@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Task } from "../models";
+    import type { Task } from  "../../models";
     import TodoItemActions from "./TodoItemActions.svelte";
 
     //export allows whatever component is using this component (so the parent) to send in
