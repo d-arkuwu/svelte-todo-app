@@ -1,8 +1,11 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import type { Task } from "../../models";
     import TodoItem from "./TodoItem.svelte";
 
     export let todoItems:Task[]
+
+    const dispatcher = createEventDispatcher()
 
     function onDeleteItem(id:string) {
         todoItems = todoItems.filter(
@@ -17,7 +20,8 @@
         <TodoItem
             bind:task={todoItem}
             on:deleteItem={() => onDeleteItem(todoItem.id)}
-        />declare module 'foo';
+            on:editItem={() => dispatcher("editItem", todoItem)}
+        />
     {/each}
 </div>
 

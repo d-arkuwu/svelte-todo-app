@@ -11,7 +11,7 @@
 
 <div>
     <span contenteditable="true" bind:textContent={task.title}></span>
-    <TodoItemActions on:deleteItem />
+    <TodoItemActions on:deleteItem on:editItem />
 </div>
 
 <style>
