@@ -1,8 +1,11 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import type { Task } from  "../../models";
     import { v4 as uuidv4 } from 'uuid';
 
     export let todoItems: Task[];
+
+    const dispatcher = createEventDispatcher();
 
     var newItemTitle: string = "";
 
@@ -23,6 +26,8 @@
             },
         ];
         newItemTitle = "";
+
+        dispatcher("newTaskCreated")
     }
 </script>
 

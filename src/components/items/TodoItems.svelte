@@ -11,6 +11,7 @@
         todoItems = todoItems.filter(
             (todoItem: Task) => todoItem.id != id
         );
+        dispatcher("onDelete")
     }
 </script>
 
@@ -20,7 +21,8 @@
         <TodoItem
             bind:task={todoItem}
             on:deleteItem={() => onDeleteItem(todoItem.id)}
-            on:editItem={() => dispatcher("editItem", todoItem)}
+            on:editItem={() => dispatcher("editItem", todoItem)}  
+            on:titleBlur={() => dispatcher("titleBlur", todoItem)}   
         />
     {/each}
 </div>

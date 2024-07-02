@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import TodoItemAdd from "./components/items/TodoItemAdd.svelte";
     import TodoItems from "./components/items/TodoItems.svelte";
     import EditTaskModel from "./components/modals/EditTaskModel.svelte";
@@ -12,29 +13,56 @@
 
     let isEditTaskModalVisible = false;
 
-    let taskToEdit:Task;
+    let taskToEdit: Task;
 
-    function onTaskEdit(event:any){
-        console.log(event.detail)
-        taskToEdit = structuredClone(event.detail)
+    onMount(
+        () =>{
+            const data = window.localStorage.getItem("TodoItemArray");
+            if(data == null)
+                return;
+
+            try {
+                const todoData:Task[] = JSON.parse(data);
+                todoItems = todoData;
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    )
+
+    function onTaskEdit(event: any) {
+        console.log(event.detail);
+        taskToEdit = structuredClone(event.detail);
         isEditTaskModalVisible = true;
     }
 
-    function logTasks(){
-        console.log(todoItems)
+    function logTasks() {
+        console.log(todoItems);
     }
-    
-    function onSave(event:any){
-        console.log(event.detail)
-        todoItems = todoItems.map((v:Task) => v.id == event.detail.id ? event.detail : v)
+
+    function onSave(event: any) {
+        console.log(event.detail);
+        todoItems = todoItems.map((v: Task) =>
+            v.id == event.detail.id ? event.detail : v
+        );
+        saveToLocalStorage();
+    }
+
+    function saveToLocalStorage() {
+        window.localStorage.setItem("TodoItemArray", JSON.stringify(todoItems));
     }
 </script>
 
 <main>
     <button on:click={logTasks}> log </button>
-    <EditTaskModel bind:task={taskToEdit} bind:isVisible={isEditTaskModalVisible} on:onSave={onSave}></EditTaskModel>
-    <TodoItems bind:todoItems on:editItem={onTaskEdit} />
-    <TodoItemAdd bind:todoItems />
+    <EditTaskModel
+        bind:task={taskToEdit}
+        bind:isVisible={isEditTaskModalVisible}
+        on:onSave={onSave}
+        on:saveToLocal={saveToLocalStorage}
+    ></EditTaskModel>
+    <TodoItems bind:todoItems on:editItem={onTaskEdit} on:onDelete={saveToLocalStorage} on:titleBlur={saveToLocalStorage} />
+    <TodoItemAdd bind:todoItems on:newTaskCreated={saveToLocalStorage} />
 </main>
 
 <style>

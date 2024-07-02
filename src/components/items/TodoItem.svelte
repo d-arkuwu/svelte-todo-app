@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import type { Task } from  "../../models";
     import TodoItemActions from "./TodoItemActions.svelte";
 
@@ -7,10 +8,16 @@
     //todoitem to create the item :)
     export let task: Task;
 
+    const dispatcher = createEventDispatcher();
+
+    function onTitleBlur(){
+        dispatcher("titleBlur")
+    }
+
 </script>
 
 <div>
-    <span contenteditable="true" bind:textContent={task.title}></span>
+    <span contenteditable="true" bind:textContent={task.title} on:blur={onTitleBlur}></span>
     <TodoItemActions on:deleteItem on:editItem />
 </div>
 

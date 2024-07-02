@@ -10,6 +10,7 @@
 
     function onCloseModal(){
         isVisible = false;
+        dispatcher("saveToLocal")
     }
 
     function onSave(){
