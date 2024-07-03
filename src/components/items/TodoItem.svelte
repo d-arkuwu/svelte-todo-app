@@ -14,11 +14,15 @@
         dispatcher("titleBlur")
     }
 
+    function onCompletedStatusChange(){
+        dispatcher("statusChange")
+    }
+
 </script>
 
 <div>
     <span contenteditable="true" bind:textContent={task.title} on:blur={onTitleBlur}></span>
-    <TodoItemActions on:deleteItem on:editItem />
+    <TodoItemActions on:deleteItem on:editItem bind:completedStatus={task.isCompleted} on:completedStatusChanged={onCompletedStatusChange}/>
 </div>
 
 <style>

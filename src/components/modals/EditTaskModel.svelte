@@ -5,6 +5,7 @@
 
     const dispatcher = createEventDispatcher()
     
+    export let task:Task
     
     export let isVisible = false;
 
@@ -18,7 +19,6 @@
         onCloseModal()
     }
 
-    export let task:Task
 </script>
 
 <!-- we did create this wrapper for Model but now we need to dynamically output a model that allows us to edit tasks -->
